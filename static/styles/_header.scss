@@ -2,7 +2,7 @@
 
 .header {
   position: relative;
-  background-image: url('/images/header.jpg');
+  background-image: url('/static/images/header.jpg');
   background-size: cover;
   background-position: center top;
   height: 70vh;
@@ -16,7 +16,7 @@
 }
 
 .header__logo {
-  background-image: url('/images/kino-logo.png');
+  background-image: url('/static/images/kino-logo.png');
   background-size: cover;
   width: 10rem;
   height: 5rem;

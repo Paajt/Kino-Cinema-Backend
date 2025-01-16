@@ -1,5 +1,5 @@
 // vite will now compile our scss
-import './styles.scss';
+import '../styles/styles.scss';
 //JS Import
 import MovieCardGenerator from './_frontpage_movie_cards.js';
 import LoadAllFilmsPage from './LoadAllFilmsPage.js';
