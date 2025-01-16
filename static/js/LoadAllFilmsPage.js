@@ -1,4 +1,4 @@
-import SearchFilter from './SearchFilter';
+import SearchFilter from './SearchFilter.js';
 
 export default class LoadAllFilmsPage extends EventTarget {
   constructor(backend) {
