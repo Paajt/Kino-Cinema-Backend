@@ -1,6 +1,52 @@
-doctype html
-html 
-head
-    title Testing Pug 
-body 
-    h1 Hello, Pug!
+extends layout.pug
+block content
+		section.movies
+			h2.movies__header FILMER PÅ KINO
+			ul.movies__list
+			.movies__actions
+				a.movies__actions-bookTicket(href="#" aria-label="Book moive tickets now") BOKA BILJETT
+				a.movies__actions-seeAll(href="movies" aria-label="See all movies") SE ALLA FILMER
+		section.live
+			h2.live__header LIVE PÅ KINO
+			ul.live__list
+			.live__actions
+				a.live__actions-bookTicket(href="#" aria-label="Book live tickets now") BOKA BILJETT TILL LIVE-EVENT
+				a.live__actions-seeAll(href="#" aria-label="See all live-events") SE ALLA LIVE-EVENT
+		section.tagline
+			h2.tagline__heading KINO - EN ALLDELES SPECIELL BIOUPPLEVELSE
+			p.tagline__subheading AV FILMÄLSKARE - FÖR FILMÄLSKARE
+		section.buttons_membership_events
+			button.membership BLI MEDLEM
+			button.events EVENEMANG
+		section.story
+			img.story__image_1(src="static/images/Kino_exterior.png" alt="Image of the entrance to a Kino cinema")
+			.story__content_1
+				h2.story__heading DIN LOKALA BIOGRAF
+				p.story__text.
+					
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum iusto aspernatur culpa reiciendis vitae doloribus nobis exercitationem sunt, dolore quisquam nesciunt ipsa. Ratione maxime, officiis facilis velit ab odio vel.
+					
+			.story__content_2
+				h2.story__heading ANNORLUND OCH UNIKT
+				p.story__text.
+					
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum iusto aspernatur culpa reiciendis vitae doloribus nobis exercitationem sunt, dolore quisquam nesciunt ipsa. Ratione maxime, officiis facilis velit ab odio vel.
+					
+			img.story__image_2(src="static/images/Kino_doors.png" alt="Image of a hallway leading to a door with the Kino logo")
+		section.event
+			img.event_image(src="static/images/Kino_festival.png" alt="Image of an event")
+		section.features
+			img.features__image_1(src="static/images/Kino_screen.png" alt="Image of film screen")
+			.features__content_1
+				h2.features__heading BÄTTRE LJUD OCH BILD ÄN HEMMA
+				p.features__text.
+					
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum iusto aspernatur culpa reiciendis vitae doloribus nobis exercitationem sunt, dolore quisquam nesciunt ipsa. Ratione maxime, officiis facilis velit ab odio vel.
+					
+			.features__content_2
+				h2.features__heading MAT OCH DRYCK VID DIN PLATS
+				p.features__text.
+					
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum iusto aspernatur culpa reiciendis vitae doloribus nobis exercitationem sunt, dolore quisquam nesciunt ipsa. Ratione maxime, officiis facilis velit ab odio vel.
+					
+			img.features__image_2(src="static/images/Kino_seats.png" alt="Image of the auditorium seats")

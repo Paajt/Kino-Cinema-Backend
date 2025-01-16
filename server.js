@@ -15,6 +15,14 @@ app.get('/', (request, response) => {
   response.render('index');
 });
 
+app.get('/about', (request, response) => {
+  response.render('about');
+});
+
+app.get('/movies', (request, response) => {
+  response.render('movies');
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
