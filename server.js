@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-import sass from 'sass';
+import * as sass from 'sass';
 import fs from 'fs/promises';
 
 const app = express();
