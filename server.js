@@ -6,8 +6,8 @@ import pug from 'pug';
 const app = express();
 const port = 5080;
 
+app.set('views', './views');
 app.set('view engine', 'pug');
-app.set('views', path.join(process.cwd(), 'views'));
 
 app.get('/', async (request, response) => {
   const buf = await fs.readFile('index.html');

@@ -16,15 +16,15 @@
   height: 0.8rem;
 }
 
-  .moviesSecond__search input {
-    position: absolute;
-    left: 1rem;
-    top: 20%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    max-width: 400px;
-  }
+.moviesSecond__search input {
+  position: absolute;
+  left: 1rem;
+  top: 20%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 400px;
+}
 .moviesSecond__list {
   display: flex;
   flex-wrap: wrap;

@@ -1,0 +1,26 @@
+@use 'variables' as *;
+
+.tagline {
+  background-color: $gray;
+  padding: 5rem 10rem 0rem 10rem;
+  text-align: center;
+  text-shadow: 2px 7px 7px rgba(0, 0, 0, 0.3);
+}
+
+.tagline__heading {
+  color: $red;
+  font-size: 2.2rem;
+  padding: 0rem 0rem 0.5rem 0rem;
+}
+
+.tagline__subheading {
+  color: $red;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 800px) {
+  .tagline {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
