@@ -11,14 +11,12 @@ app.use('/static/styles', (request, response, next) => {
   const scssPath = path.join(process.cwd(), 'static', 'styles', 'styles.scss');
   const cssPath = path.join(process.cwd(), 'static', 'styles', 'styles.css');
 
-  // Kompilera SCSS till CSS
   sass.render({ file: scssPath }, (err, result) => {
     if (err) {
       console.error(err);
       return next(err);
     }
 
-    // Skriv den genererade CSS-filen
     fs.writeFile(cssPath, result.css)
       .then(() => response.sendFile(cssPath))
       .catch(next);
