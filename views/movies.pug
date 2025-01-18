@@ -1,4 +1,7 @@
-extends layout.pug
+extends layouts/layout.pug
 block content
-		.moviesSecond
-			.movies__message
+	h1 Movies
+	ul 
+		each movie in allMovies 
+  			li
+				a(href=`/movies/${movie.id}`) #{movie.title} (#{movie.year})
