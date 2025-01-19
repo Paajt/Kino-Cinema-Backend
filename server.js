@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import * as sass from 'sass';
 import fs from 'fs/promises';
+import { loadAllMovies, loadSingleMovie } from './static/js/movies.js';
 
 const app = express();
 const port = 5080;
@@ -33,8 +34,15 @@ app.get('/about', (request, response) => {
   response.render('about');
 });
 
-app.get('/movies', (request, response) => {
-  response.render('movies');
+app.get('/movies', async (request, response) => {
+  const allMovies = await loadAllMovies();
+  response.render('movies', { allMovies });
+});
+
+app.get('/movies/:movieId', async (request, response) => {
+  const movieId = request.params.movieId;
+  const singleMovie = await loadSingleMovie(movieId);
+  response.render('movieID', { singleMovie });
 });
 
 app.listen(port, () => {
