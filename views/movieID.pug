@@ -1,0 +1,12 @@
+extends layouts/layout.pug
+
+block content 
+    div(class=movie)
+        article
+            if singleMovie.image 
+                img(src=singleMovie.image, alt=singleMovie.title, width="300")
+            else 
+                p No image available.
+            h2 #{singleMovie.title}
+            p #{singleMovie.intro}
+            a(href="/movies") Back to all movies
