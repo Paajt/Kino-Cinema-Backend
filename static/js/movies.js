@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import { marked } from 'marked';
 
 const Movie_API = 'https://plankton-app-xhkom.ondigitalocean.app/api/';
 
@@ -19,7 +20,7 @@ export async function loadSingleMovie(id) {
   return {
     id: payload.data.id,
     title: payload.data.attributes.title,
-    intro: payload.data.attributes.intro,
+    intro: marked(payload.data.attributes.intro),
     image: payload.data.attributes.image?.url,
   };
 }
