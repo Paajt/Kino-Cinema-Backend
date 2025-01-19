@@ -27,7 +27,7 @@ app.set('views', path.join(process.cwd(), './views'));
 app.set('view engine', 'pug');
 
 app.get('/', (request, response) => {
-  response.render('index');
+  response.render('index', { page: 'home' });
 });
 
 app.get('/about', (request, response) => {
