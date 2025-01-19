@@ -23,11 +23,6 @@ export default class LiveEventDOMHandler {
   }
 
   renderLiveEvents(liveEventData) {
-    if (!this.container) {
-      console.error('Container element not found');
-      return;
-    }
-
     if (!Array.isArray(liveEventData) || liveEventData.length === 0) {
       this.container.innerHTML = '<p> No live events founds.</p>';
       return;

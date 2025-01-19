@@ -1,10 +1,10 @@
-import MovieCardGenerator from './_frontpage_movie_cards.js';
-import LoadAllFilmsPage from './LoadAllFilmsPage.js';
-import ApiBackend from './ApiBackend.js';
+//import MovieCardGenerator from './_frontpage_movie_cards.js';
+//import LoadAllFilmsPage from './LoadAllFilmsPage.js';
+//import ApiBackend from './ApiBackend.js';
 import MobileMenu from './MobileMenu.js';
 import initLiveEvents from './_initLiveEvents.js';
 
-if (document.querySelector('.moviesSecond')) {
+/*if (document.querySelector('.moviesSecond')) {
   const loadingMessage = document.createElement('h4');
   loadingMessage.classList.add('movies__message__new');
   loadingMessage.innerText = 'Api is starting\nLoading movies... Please wait.';
@@ -22,5 +22,5 @@ if (document.querySelector('.moviesSecond')) {
   const movieCardGenerator = new MovieCardGenerator(backend);
   movieCardGenerator.CardGenerator(4);
 }
-
+*/
 document.addEventListener('DOMContentLoaded', initLiveEvents);
