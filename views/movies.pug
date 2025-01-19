@@ -1,7 +1,8 @@
 extends layouts/layout.pug
 block content
-	h1 Movies
-	ul 
-		each movie in allMovies 
-  			li
-				a(href=`/movies/${movie.id}`) #{movie.title} (#{movie.year})
+	div
+		h1 Movies
+		ul 
+			each movie in allMovies
+				li
+					a(href=movie.id ? `/movies/${movie.id}` : '#') #{movie.title}
