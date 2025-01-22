@@ -1,5 +1,8 @@
-import app from './static/js/app.js';
+import initApp from './static/js/app.js';
 
-app.listen(5080, () => {
-  console.log(`Server running at http://localhost:5080`);
+const app = initApp();
+const port = 5080;
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });
