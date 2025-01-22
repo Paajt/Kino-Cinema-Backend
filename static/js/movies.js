@@ -8,14 +8,17 @@ export async function loadAllMovies() {
   const payload = await response.json();
   return payload.data.map((movie) => ({
     id: movie.id,
-    title: movie.attributes.title,
-    intro: movie.attributes.intro,
-    image: movie.attributes.image?.url,
+    ...movie.attributes,
   }));
 }
 
 export async function loadSingleMovie(id) {
   const response = await fetch(`${Movie_API}movies/${id}`);
+
+  if (!response.ok) {
+    return null;
+  }
+
   const payload = await response.json();
   return {
     id: payload.data.id,

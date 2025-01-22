@@ -42,6 +42,11 @@ app.get('/movies', async (request, response) => {
 app.get('/movies/:movieId', async (request, response) => {
   const movieId = request.params.movieId;
   const singleMovie = await loadSingleMovie(movieId);
+
+  if (!singleMovie) {
+    return response.status(404).render('404');
+  }
+
   response.render('movieID', { singleMovie });
 });
 
