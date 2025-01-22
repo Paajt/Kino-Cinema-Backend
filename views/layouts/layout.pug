@@ -6,7 +6,8 @@ html(lang="en")
 		link(rel="stylesheet" href="/static/styles/styles.scss")
 		if page === 'home'
 			script(type="module" src="/static/js/main.js")
-		title Kino-bio-page
+		block title
+			title Kino Bio - Uppsala
 	body
 include ../partials/header.pug
 block content
