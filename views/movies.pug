@@ -9,4 +9,4 @@ block content
 		ul 
 			each movie in allMovies
 				li
-					a(href=movie.id ? `/movies/${movie.id}` : '#') #{movie.title}
+					a(href=movie.id ? `/movies/${movie.id}` : '#' aria-label=movie.title) #{movie.title}
