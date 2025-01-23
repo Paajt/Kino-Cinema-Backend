@@ -12,4 +12,8 @@ block content
 					p No image available.
 			h2 #{singleMovie.title}
 			p !{singleMovie.intro}
-			a(href="/movies") Back to all movies
+		section.movies
+			ul.movies__list
+			.movies__actions
+				a.movies__actions-bookTicket(href="#" aria-label="Book moive tickets now") BOKA BILJETT
+				a.movies__actions-seeAll(href="/movies" aria-label="See all movies") SE ALLA FILMER
