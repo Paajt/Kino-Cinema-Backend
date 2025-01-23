@@ -133,3 +133,47 @@
     }
   }
 }
+
+.error {
+  color: white;
+  font-size: 1.5rem;
+  margin: 3rem 0;
+  text-align: center;
+
+  p {
+    margin: 2rem 0 4rem 0;
+  }
+}
+
+.primary_button {
+  text-decoration: none;
+}
+
+.movie__list {
+  font-family: $font-family-base;
+  text-align: center;
+  margin: 1rem;
+
+  h1 {
+    font-size: 3rem;
+    color: white;
+    text-shadow: 4px 4px 10px black;
+  }
+
+  li {
+    font-size: 1.5rem;
+    margin: 1rem;
+    list-style: none;
+    text-decoration: none;
+  }
+
+  li:active,
+  :visited {
+    color: white;
+    text-decoration: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

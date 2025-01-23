@@ -4,7 +4,7 @@ block title
 	title Kino Uppsala - #{singleMovie.title}
 
 block content 
-		div(class=movie)
+		.singleMovie__container
 			article
 				if singleMovie.image 
 					img(src=singleMovie.image, alt=singleMovie.title, width="300")
