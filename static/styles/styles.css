@@ -657,7 +657,8 @@
   list-style: none;
   text-decoration: none;
 }
-.movie__list li:active, .movie__list :visited {
+.movie__list li:active,
+.movie__list :visited {
   color: white;
   text-decoration: none;
 }
