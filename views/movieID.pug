@@ -10,8 +10,8 @@ block content
 					img(src=singleMovie.image, alt=singleMovie.title, width="300")
 				else 
 					p No image available.
-			h2 #{singleMovie.title}
-			p !{singleMovie.intro}
+			h2 #{singleMovie.title || 'Movie title missing'}
+			p !{singleMovie.intro || 'Description missing'} 
 		section.movies
 			ul.movies__list
 			.movies__actions

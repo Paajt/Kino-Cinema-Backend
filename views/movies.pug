@@ -6,7 +6,10 @@ block title
 block content
 	.movie__list
 		h1 Movies
-		ul 
-			each movie in allMovies
-				li
-					a(href=movie.id ? `/movies/${movie.id}` : '#' aria-label=movie.title) #{movie.title}
+		if allMovies.length
+			ul 
+				each movie in allMovies
+					li
+						a(href=movie.id ? `/movies/${movie.id}` : '#' aria-label=movie.title) #{movie.title || 'Movie title missing'}
+		else
+			p.error No movies found.
