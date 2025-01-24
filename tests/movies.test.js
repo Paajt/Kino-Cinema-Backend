@@ -1,7 +1,7 @@
-import { expect, test } from '@jest/globals';
+import { describe, expect, test } from '@jest/globals';
 import request from 'supertest';
 
-import initApp from '../static/js/app.js';
+import initApp from '../src/js/server/app.js';
 
 import { marked } from 'marked';
 
@@ -75,11 +75,20 @@ test('Show 404 page if movie ID does not exist', async () => {
   expect(response.text).toMatch(/Page not found/);
 });
 
-test('Static files serves correctly', async () => {
-  const app = initApp();
-  const response = await request(app).get('/static/styles/styles.css').expect(200);
+describe('Successfully serves static files', () => {
+  test('Serves styles.css successfully', async () => {
+    const app = initApp();
+    const response = await request(app).get('/src/styles/styles.css').expect(200);
 
-  expect(response.text).toMatch(/body/);
+    expect(response.text).toMatch(/body/);
+  });
+
+  test('Serves main.js successfully', async () => {
+    const app = initApp();
+    const response = await request(app).get('/src/js/main.js').expect(200);
+
+    expect(response.text).toMatch('initLiveEvents');
+  });
 });
 
 test('Converts markdown to HTML on intro text', async () => {
@@ -99,81 +108,85 @@ test('Converts markdown to HTML on intro text', async () => {
   expect(response.text).toMatch('<p>This is a <em>test</em> using <strong>marked</strong></p>');
 });
 
-test('Empty movie list returns: No movies message', async () => {
-  const app = initApp({
-    loadAllMovies: async () => [], // Returns empty list
+describe('Handles empty list and missing title on movie page', () => {
+  test('Empty movie list returns: No movies message', async () => {
+    const app = initApp({
+      loadAllMovies: async () => [], // Returns empty list
+    });
+
+    const response = await request(app).get('/movies').expect('Content-Type', /html/).expect(200);
+
+    expect(response.text).toMatch(/No movies found/);
   });
 
-  const response = await request(app).get('/movies').expect('Content-Type', /html/).expect(200);
+  test('Handles movie list with missing title value', async () => {
+    const app = initApp({
+      loadAllMovies: async () => [
+        {
+          id: 1,
+          // No title
+          intro: 'A Colombian teenage girl',
+        },
+        {
+          id: 2,
+          title: 'Training Day',
+          intro: 'A rookie cop',
+        },
+      ],
+    });
 
-  expect(response.text).toMatch(/No movies found/);
+    const response = await request(app).get('/movies').expect('Content-Type', /html/).expect(200);
+
+    expect(response.text).toMatch(/Movie title missing/);
+    expect(response.text).toMatch('Training Day');
+  });
 });
 
-test('Handles movie list with missing title value', async () => {
-  const app = initApp({
-    loadAllMovies: async () => [
-      {
+describe('Handles single movie/id pages with missing different values', () => {
+  test('Handles single movie with missing title value', async () => {
+    const app = initApp({
+      loadSingleMovie: async () => ({
         id: 1,
-        // No title
+        title: null, // Missing title
         intro: 'A Colombian teenage girl',
-      },
-      {
-        id: 2,
-        title: 'Training Day',
-        intro: 'A rookie cop',
-      },
-    ],
+      }),
+    });
+
+    const response = await request(app).get('/movies/1').expect('Content-Type', /html/).expect(200);
+
+    expect(response.text).toMatch(/Movie title missing/);
+    expect(response.text).toMatch('A Colombian teenage girl');
   });
 
-  const response = await request(app).get('/movies').expect('Content-Type', /html/).expect(200);
+  test('Handles single movie with missing intro value', async () => {
+    const app = initApp({
+      loadSingleMovie: async () => ({
+        id: 1,
+        title: 'Encanto',
+        intro: null, // Missing intro
+      }),
+    });
 
-  expect(response.text).toMatch(/Movie title missing/);
-  expect(response.text).toMatch('Training Day');
-});
+    const response = await request(app).get('/movies/1').expect('Content-Type', /html/).expect(200);
 
-test('Handles single movie with missing title value', async () => {
-  const app = initApp({
-    loadSingleMovie: async () => ({
-      id: 1,
-      title: null, // Missing title
-      intro: 'A Colombian teenage girl',
-    }),
+    expect(response.text).toMatch('Encanto');
+    expect(response.text).toMatch(/Description missing/);
   });
 
-  const response = await request(app).get('/movies/1').expect('Content-Type', /html/).expect(200);
+  test('Handles single movie with missing image value', async () => {
+    const app = initApp({
+      loadSingleMovie: async () => ({
+        id: 1,
+        title: 'Encanto',
+        intro: 'A Colombian teenage girl',
+        image: null, // Missing image
+      }),
+    });
 
-  expect(response.text).toMatch(/Movie title missing/);
-  expect(response.text).toMatch('A Colombian teenage girl');
-});
+    const response = await request(app).get('/movies/1').expect('Content-Type', /html/).expect(200);
 
-test('Handles single movie with missing intro value', async () => {
-  const app = initApp({
-    loadSingleMovie: async () => ({
-      id: 1,
-      title: 'Encanto',
-      intro: null, // Missing intro
-    }),
+    expect(response.text).toMatch('Encanto');
+    expect(response.text).toMatch('A Colombian teenage girl');
+    expect(response.text).toMatch(/No image available/);
   });
-
-  const response = await request(app).get('/movies/1').expect('Content-Type', /html/).expect(200);
-
-  expect(response.text).toMatch('Encanto');
-  expect(response.text).toMatch(/Description missing/);
-});
-
-test('Handles single movie with missing image value', async () => {
-  const app = initApp({
-    loadSingleMovie: async () => ({
-      id: 1,
-      title: 'Encanto',
-      intro: 'A Colombian teenage girl',
-      image: null, // Missing image
-    }),
-  });
-
-  const response = await request(app).get('/movies/1').expect('Content-Type', /html/).expect(200);
-
-  expect(response.text).toMatch('Encanto');
-  expect(response.text).toMatch('A Colombian teenage girl');
-  expect(response.text).toMatch(/No image available/);
 });
