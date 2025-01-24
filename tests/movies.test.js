@@ -98,3 +98,82 @@ test('Converts markdown to HTML on intro text', async () => {
   expect(response.text).toMatch('Encanto');
   expect(response.text).toMatch('<p>This is a <em>test</em> using <strong>marked</strong></p>');
 });
+
+test('Empty movie list returns: No movies message', async () => {
+  const app = initApp({
+    loadAllMovies: async () => [], // Returns empty list
+  });
+
+  const response = await request(app).get('/movies').expect('Content-Type', /html/).expect(200);
+
+  expect(response.text).toMatch(/No movies found/);
+});
+
+test('Handles movie list with missing title value', async () => {
+  const app = initApp({
+    loadAllMovies: async () => [
+      {
+        id: 1,
+        // No title
+        intro: 'A Colombian teenage girl',
+      },
+      {
+        id: 2,
+        title: 'Training Day',
+        intro: 'A rookie cop',
+      },
+    ],
+  });
+
+  const response = await request(app).get('/movies').expect('Content-Type', /html/).expect(200);
+
+  expect(response.text).toMatch(/Movie title missing/);
+  expect(response.text).toMatch('Training Day');
+});
+
+test('Handles single movie with missing title value', async () => {
+  const app = initApp({
+    loadSingleMovie: async () => ({
+      id: 1,
+      title: null, // Missing title
+      intro: 'A Colombian teenage girl',
+    }),
+  });
+
+  const response = await request(app).get('/movies/1').expect('Content-Type', /html/).expect(200);
+
+  expect(response.text).toMatch(/Movie title missing/);
+  expect(response.text).toMatch('A Colombian teenage girl');
+});
+
+test('Handles single movie with missing intro value', async () => {
+  const app = initApp({
+    loadSingleMovie: async () => ({
+      id: 1,
+      title: 'Encanto',
+      intro: null, // Missing intro
+    }),
+  });
+
+  const response = await request(app).get('/movies/1').expect('Content-Type', /html/).expect(200);
+
+  expect(response.text).toMatch('Encanto');
+  expect(response.text).toMatch(/Description missing/);
+});
+
+test('Handles single movie with missing image value', async () => {
+  const app = initApp({
+    loadSingleMovie: async () => ({
+      id: 1,
+      title: 'Encanto',
+      intro: 'A Colombian teenage girl',
+      image: null, // Missing image
+    }),
+  });
+
+  const response = await request(app).get('/movies/1').expect('Content-Type', /html/).expect(200);
+
+  expect(response.text).toMatch('Encanto');
+  expect(response.text).toMatch('A Colombian teenage girl');
+  expect(response.text).toMatch(/No image available/);
+});
