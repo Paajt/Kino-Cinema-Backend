@@ -665,6 +665,14 @@
 .movie__list a {
   text-decoration: none;
 }
+.movie__list a:hover {
+  color: lightblue;
+  text-shadow: 4px 4px 5px black;
+}
+.movie__list p.error {
+  margin-top: 2rem;
+  color: white;
+}
 
 .story {
   display: grid;
@@ -902,8 +910,12 @@
   margin: 2rem 0;
   color: white;
 }
+.singleMovie__container img {
+  border-radius: 8px;
+}
 .singleMovie__container h2 {
   margin: 1rem;
+  text-shadow: 4px 4px 5px black;
 }
 .singleMovie__container p {
   max-width: 500px;

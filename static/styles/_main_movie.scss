@@ -176,4 +176,14 @@
   a {
     text-decoration: none;
   }
+
+  a:hover {
+    color: lightblue;
+    text-shadow: 4px 4px 5px black;
+  }
+
+  p.error {
+    margin-top: 2rem;
+    color: white;
+  }
 }
