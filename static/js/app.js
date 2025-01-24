@@ -2,7 +2,6 @@ import express from 'express';
 import path from 'path';
 import * as sass from 'sass';
 import fs from 'fs/promises';
-import { loadAllMovies, loadSingleMovie } from './movies.js';
 
 function initApp(api) {
   const app = express();
