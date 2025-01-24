@@ -6,9 +6,9 @@ import fs from 'fs/promises';
 function initApp(api) {
   const app = express();
 
-  app.use('/static/styles', async (request, response, next) => {
-    const scssPath = path.join(process.cwd(), 'static', 'styles', 'styles.scss');
-    const cssPath = path.join(process.cwd(), 'static', 'styles', 'styles.css');
+  app.use('/src/styles', async (request, response, next) => {
+    const scssPath = path.join(process.cwd(), 'src', 'styles', 'styles.scss');
+    const cssPath = path.join(process.cwd(), 'src', 'styles', 'styles.css');
 
     try {
       const result = await sass.compileAsync(scssPath);
@@ -21,6 +21,7 @@ function initApp(api) {
   });
 
   app.use('/static', express.static(path.join(process.cwd(), 'static')));
+  app.use('/src/', express.static(path.join(process.cwd(), 'src')));
 
   app.set('views', path.join(process.cwd(), './views'));
   app.set('view engine', 'pug');

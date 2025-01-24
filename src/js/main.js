@@ -1,6 +1,8 @@
-//import MovieCardGenerator from './_frontpage_movie_cards.js';
-//import LoadAllFilmsPage from './LoadAllFilmsPage.js';
-//import ApiBackend from './ApiBackend.js';
+/*
+import MovieCardGenerator from './_frontpage_movie_cards.js';
+import LoadAllFilmsPage from './LoadAllFilmsPage.js';
+import ApiBackend from './ApiBackend.js';
+*/
 import MobileMenu from './MobileMenu.js';
 import initLiveEvents from './_initLiveEvents.js';
 
