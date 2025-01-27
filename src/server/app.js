@@ -1,29 +1,27 @@
 import express from 'express';
-import path from 'path';
 import * as sass from 'sass';
 import fs from 'fs/promises';
 
 function initApp(api) {
   const app = express();
 
-  app.use('/src/styles', async (request, response, next) => {
-    const scssPath = path.join(process.cwd(), 'src', 'styles', 'styles.scss');
-    const cssPath = path.join(process.cwd(), 'src', 'styles', 'styles.css');
+  app.use('/static/styles', async (request, response, next) => {
+    const scssPath = './static/styles/styles.scss';
+    const cssPath = './static/styles/styles.css';
 
     try {
       const result = await sass.compileAsync(scssPath);
       await fs.writeFile(cssPath, result.css);
-      response.sendFile(cssPath);
+      response.sendFile(cssPath, { root: '.' });
     } catch (err) {
       console.error(err);
       next(err);
     }
   });
 
-  app.use('/static', express.static(path.join(process.cwd(), 'static')));
-  app.use('/src/', express.static(path.join(process.cwd(), 'src')));
+  app.use('/static', express.static('./static'));
 
-  app.set('views', path.join(process.cwd(), './views'));
+  app.set('views', './views');
   app.set('view engine', 'pug');
 
   app.get('/', (request, response) => {

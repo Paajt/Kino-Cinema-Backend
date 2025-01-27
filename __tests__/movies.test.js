@@ -1,7 +1,7 @@
 import { describe, expect, test } from '@jest/globals';
 import request from 'supertest';
 
-import initApp from '../src/js/server/app.js';
+import initApp from '../src/server/app.js';
 
 import { marked } from 'marked';
 
@@ -78,14 +78,14 @@ test('Show 404 page if movie ID does not exist', async () => {
 describe('Successfully serves static files', () => {
   test('Serves styles.css successfully', async () => {
     const app = initApp();
-    const response = await request(app).get('/src/styles/styles.css').expect(200);
+    const response = await request(app).get('/static/styles/styles.css').expect(200);
 
     expect(response.text).toMatch(/body/);
   });
 
   test('Serves main.js successfully', async () => {
     const app = initApp();
-    const response = await request(app).get('/src/js/main.js').expect(200);
+    const response = await request(app).get('/static/js/main.js').expect(200);
 
     expect(response.text).toMatch('initLiveEvents');
   });

@@ -1,5 +1,5 @@
-import initApp from './src/js/server/app.js';
-import { loadAllMovies, loadSingleMovie } from './src/js/server/movies.js';
+import initApp from './src/server/app.js';
+import { loadAllMovies, loadSingleMovie } from './src/server/movies.js';
 
 const api = {
   loadAllMovies,
